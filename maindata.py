@@ -4,12 +4,20 @@ import datetime
 import pyttsx3  
 import time
 import pandas as pd
-
+from playsound import playsound
+from gtts import gTTS
 
 while True:
-    for i in range(1,31):
+    for i in range(1,32):
+
+        dia = i
+        print(dia)
+        
         print("\nGenerando direccion . . . ")
         time.sleep(1)
+
+        
+
         
         if i >= 10:
             link_base = f'https://www.sismologia.cl/sismicidad/catalogo/2020/01/202001{i}.html'
@@ -35,11 +43,16 @@ while True:
         print(info)
         """ df.to_csv('file_name.csv', encoding='utf-8') """
         print("\nEscribiendo data en csv . . .")
-        df.to_csv('datasismos.csv', mode='a', index=False, header=False, encoding='utf-8')
+        df.to_csv('datasismos.csv', mode='a', index=False, header=True, encoding='utf-8')
         fecha_data = datetime.datetime.now()
         time.sleep(1)
+        if i == 32:
+            tts = gTTS('Secuencia enero terminada')
+            tts.save('speak.mp3')
+            playsound('speak.mp3')
+            break
+
         print("\n")
 
-    time.sleep(40) 
 
 
